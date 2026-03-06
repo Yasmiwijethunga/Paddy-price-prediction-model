@@ -14,7 +14,7 @@ class Settings:
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 1440  # 24 hours
 
-    # Database
+    # Databasec
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./paddy_price.db")
 
     # File upload
@@ -28,6 +28,14 @@ class Settings:
 
     # CORS
     FRONTEND_ORIGIN: str = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
+    FRONTEND_ORIGINS: list = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:3001",
+        "http://127.0.0.1:3001",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ]
 
 
 settings = Settings()

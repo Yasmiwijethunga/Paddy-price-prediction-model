@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #F4F6F3;
+    color: #1a1a1a;
+  }
+}
+
+@layer components {
+  /* Custom slider styling */
+  .custom-slider {
+    @apply w-full h-2 rounded-full appearance-none cursor-pointer;
+    background: linear-gradient(to right, #2D6A4F var(--slider-pct, 50%), #F5A623 var(--slider-pct, 50%));
+  }
+  .custom-slider::-webkit-slider-thumb {
+    @apply appearance-none w-5 h-5 rounded-full bg-white border-2 border-primary-500 shadow-md;
+    -webkit-appearance: none;
+  }
+  .custom-slider::-moz-range-thumb {
+    @apply w-5 h-5 rounded-full bg-white border-2 border-primary-500 shadow-md;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: #2D6A4F; border-radius: 3px; }
+
+  .nav-link {
+    @apply flex items-center gap-3 px-4 py-2.5 rounded-lg text-gray-300 hover:bg-primary-600 hover:text-white transition-all duration-200 text-sm font-medium;
+  }
+  .nav-link.active {
+    @apply bg-amber-500 text-white;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-all duration-200 flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-medium px-4 py-2.5 rounded-lg transition-all duration-200 flex items-center gap-2;
+  }
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-5;
+  }
+  .input-field {
+    @apply w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+  }
+}
