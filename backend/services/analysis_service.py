@@ -51,6 +51,7 @@ def get_trends(db: Session) -> list[dict[str, Any]]:
             "harvest_quantity":     r.harvest_quantity,
             "rainfall":             r.rainfall,
             "temperature":          r.temperature,
+            "rice_consumption":     r.rice_consumption,
         })
 
     return trends
