@@ -1,16 +1,21 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import {
   LayoutDashboard, TrendingUp, Database, BarChart2,
-  FileText, Settings, Sprout, CloudRain, DollarSign, Users, ChevronLeft, ChevronRight
+  FileText, Settings, Sprout, CloudRain, DollarSign, Users, ChevronLeft, ChevronRight,
+  ShieldCheck, FlaskConical, User
 } from 'lucide-react'
+import { useAuth } from '../../context/AuthContext'
+
+// roles: which roles can see this link (in order: user < researcher < admin)
+const ROLE_RANK = { user: 0, researcher: 1, admin: 2 }
 
 const navLinks = [
-  { to: '/dashboard',           label: 'Dashboard',          icon: LayoutDashboard },
-  { to: '/prediction',          label: 'Prediction',         icon: TrendingUp },
-  { to: '/data-management',     label: 'Data Management',    icon: Database },
-  { to: '/historical-analysis', label: 'Historical Analysis',icon: BarChart2 },
-  { to: '/reports',             label: 'Reports',            icon: FileText },
-  { to: '/model-settings',      label: 'Model Settings',     icon: Settings },
+  { to: '/dashboard',           label: 'Dashboard',          icon: LayoutDashboard, minRole: 'user' },
+  { to: '/prediction',          label: 'Prediction',         icon: TrendingUp,       minRole: 'user' },
+  { to: '/historical-analysis', label: 'Historical Analysis',icon: BarChart2,        minRole: 'user' },
+  { to: '/reports',             label: 'Reports',            icon: FileText,         minRole: 'user' },
+  { to: '/data-management',     label: 'Data Management',    icon: Database,         minRole: 'researcher' },
+  { to: '/model-settings',      label: 'Model Settings',     icon: Settings,         minRole: 'researcher' },
 ]
 
 const dataRecords = [
@@ -20,7 +25,18 @@ const dataRecords = [
   { label: 'Consumption',icon: Users,      count: '10' },
 ]
 
+const ROLE_META = {
+  admin:      { label: 'Admin',      Icon: ShieldCheck,  color: 'text-red-400' },
+  researcher: { label: 'Researcher', Icon: FlaskConical, color: 'text-amber-400' },
+  user:       { label: 'User',       Icon: User,         color: 'text-green-400' },
+}
+
 export default function Sidebar({ open, onToggle }) {
+  const { user } = useAuth()
+  const userRank = ROLE_RANK[user?.role] ?? 0
+  const visibleLinks = navLinks.filter(l => userRank >= ROLE_RANK[l.minRole])
+  const roleMeta = ROLE_META[user?.role] || ROLE_META.user
+
   return (
     <>
       {/* Mobile overlay */}
@@ -51,9 +67,19 @@ export default function Sidebar({ open, onToggle }) {
           )}
         </div>
 
+        {/* Role badge */}
+        {open && user && (
+          <div className="px-4 py-2 border-b border-white/10">
+            <div className="flex items-center gap-2 px-2 py-1.5 bg-white/5 rounded-lg">
+              <roleMeta.Icon size={14} className={roleMeta.color} />
+              <span className={`text-xs font-medium ${roleMeta.color}`}>{roleMeta.label}</span>
+            </div>
+          </div>
+        )}
+
         {/* Nav links */}
         <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
-          {navLinks.map(({ to, label, icon: Icon }) => (
+          {visibleLinks.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
               to={to}
@@ -70,8 +96,8 @@ export default function Sidebar({ open, onToggle }) {
             </NavLink>
           ))}
 
-          {/* Data Records section */}
-          {open && (
+          {/* Data Records section — researcher & admin only */}
+          {open && userRank >= ROLE_RANK['researcher'] && (
             <div className="mt-6">
               <p className="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
                 Data Records

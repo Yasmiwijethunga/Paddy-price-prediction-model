@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends, File, Form, UploadFile
 from sqlalchemy.orm import Session
 
-from dependencies import get_db, get_current_user, require_admin
+from dependencies import get_db, get_current_user, require_admin, require_researcher_or_admin
 from models.dataset import DatasetType
 from schemas.dataset import DatasetOut, DatasetUploadResponse
 from services import dataset_service
@@ -16,7 +16,7 @@ def upload(
     file: UploadFile = File(...),
     dataset_type: DatasetType = Form(...),
     db: Session = Depends(get_db),
-    current_user=Depends(require_admin),
+    current_user=Depends(require_researcher_or_admin),
 ):
     """
     Upload a CSV or Excel dataset file.

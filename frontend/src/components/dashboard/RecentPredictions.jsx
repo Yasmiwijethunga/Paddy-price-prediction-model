@@ -23,16 +23,16 @@ export default function RecentPredictions({ predictions }) {
           return (
             <div key={p.id} className="flex items-center justify-between bg-gray-50 rounded-xl p-3">
               <div className="flex items-center gap-2.5">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${up ? 'bg-green-50' : 'bg-red-50'}`}>
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-gray-100">
                   {up
-                    ? <TrendingUp size={15} className="text-green-600" />
-                    : <TrendingDown size={15} className="text-red-500" />
+                    ? <TrendingUp size={15} className="text-gray-900" />
+                    : <TrendingDown size={15} className="text-gray-900" />
                   }
                 </div>
                 <div>
                   <p className="text-sm font-semibold text-gray-800">{label}</p>
                   <p className="text-xs text-gray-400 flex items-center gap-1">
-                    <Calendar size={10} /> {date}
+                    <Calendar size={10} className="text-gray-900" /> {date}
                   </p>
                 </div>
               </div>

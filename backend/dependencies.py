@@ -65,3 +65,15 @@ def require_admin(current_user=Depends(get_current_user)):
             detail="Admin privileges are required for this action.",
         )
     return current_user
+
+
+def require_researcher_or_admin(current_user=Depends(get_current_user)):
+    """
+    Allow access to researchers and admins; blocks plain users.
+    """
+    if current_user.role not in (UserRole.admin, UserRole.researcher, 'admin', 'researcher'):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Researcher or Admin privileges are required for this action.",
+        )
+    return current_user

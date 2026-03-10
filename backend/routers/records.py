@@ -1,6 +1,9 @@
+import csv
+import io
 from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
 from dependencies import get_db, get_current_user
@@ -31,6 +34,36 @@ def list_records(
     if year is not None:
         return record_repo.get_records_by_year(db, year)
     return record_repo.get_all_records(db, skip=skip, limit=limit)
+
+
+@router.get("/export/csv")
+def export_records_csv(
+    db: Session = Depends(get_db),
+    _=Depends(get_current_user),
+):
+    """Download all paddy records as a CSV file."""
+    records = record_repo.get_all_records(db, skip=0, limit=10000)
+
+    columns = [
+        "id", "year", "season", "variety", "district",
+        "cultivated_area", "total_production", "harvest_quantity",
+        "rainfall", "temperature",
+        "fertilizer_price", "seed_cost", "pesticide_cost",
+        "population", "rice_consumption", "paddy_price",
+    ]
+
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=columns, extrasaction="ignore")
+    writer.writeheader()
+    for rec in records:
+        writer.writerow({col: getattr(rec, col, "") for col in columns})
+
+    output.seek(0)
+    return StreamingResponse(
+        iter([output.getvalue()]),
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=paddy_records.csv"},
+    )
 
 
 @router.get("/{record_id}", response_model=PaddyRecordOut)

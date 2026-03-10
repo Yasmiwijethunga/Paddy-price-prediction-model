@@ -97,7 +97,7 @@ def upload_dataset(
             )
 
     if orm_records:
-        record_repo.bulk_create_records(db, orm_records)
+        record_repo.bulk_upsert_records(db, orm_records)
 
     final_status = DatasetStatus.valid if orm_records else DatasetStatus.invalid
     dataset_repo.update_dataset_status(db, dataset.id, final_status, len(orm_records))
