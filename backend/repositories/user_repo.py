@@ -30,7 +30,7 @@ def create_user(
         username=username,
         email=email,
         hashed_password=hashed_password,
-        role=role,
+        role=role.value if hasattr(role, 'value') else role,
     )
     db.add(user)
     db.commit()
@@ -41,7 +41,7 @@ def create_user(
 def update_user_role(db: Session, user_id: int, role: UserRole) -> User | None:
     user = get_user_by_id(db, user_id)
     if user:
-        user.role = role
+        user.role = role.value if hasattr(role, 'value') else role
         db.commit()
         db.refresh(user)
     return user

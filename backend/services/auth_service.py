@@ -1,6 +1,7 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session
 
+from models.user import UserRole
 from repositories import user_repo
 from schemas.user import UserCreate
 from utils.security import verify_password, create_access_token
@@ -10,7 +11,13 @@ def register_user(db: Session, data: UserCreate):
     """
     Validate uniqueness, hash the password, persist, and return the new User.
     Raises 400 if username or email is already taken.
+    Raises 403 if caller attempts to self-register as admin.
     """
+    if data.role not in (UserRole.user, UserRole.researcher):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin accounts cannot be self-registered. Contact an existing admin.",
+        )
     if user_repo.get_user_by_username(db, data.username):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -45,5 +52,5 @@ def login_user(db: Session, username: str, password: str) -> dict:
             detail="This account has been deactivated.",
         )
 
-    token = create_access_token({"sub": str(user.id), "role": user.role.value})
+    token = create_access_token({"sub": str(user.id), "role": user.role.value if hasattr(user.role, 'value') else user.role})
     return {"access_token": token, "token_type": "bearer", "user": user}

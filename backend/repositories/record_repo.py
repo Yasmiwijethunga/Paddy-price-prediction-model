@@ -11,6 +11,42 @@ def bulk_create_records(db: Session, records: list[PaddyRecord]) -> None:
     db.commit()
 
 
+_MERGEABLE_FIELDS = [
+    "cultivated_area", "total_production", "harvest_quantity",
+    "rainfall", "temperature",
+    "fertilizer_price", "seed_cost", "pesticide_cost",
+    "population", "rice_consumption", "paddy_price",
+]
+
+
+def bulk_upsert_records(db: Session, records: list[PaddyRecord]) -> None:
+    """
+    For each record, if a row already exists for the same (year, season,
+    district, variety), merge non-None fields into it instead of inserting
+    a duplicate row.  Commits once at the end.
+    """
+    for rec in records:
+        existing = (
+            db.query(PaddyRecord)
+            .filter(
+                PaddyRecord.year == rec.year,
+                PaddyRecord.season == rec.season,
+                PaddyRecord.district == rec.district,
+                PaddyRecord.variety == rec.variety,
+            )
+            .first()
+        )
+        if existing is None:
+            db.add(rec)
+        else:
+            for field in _MERGEABLE_FIELDS:
+                val = getattr(rec, field)
+                if val is not None:
+                    setattr(existing, field, val)
+            existing.dataset_id = rec.dataset_id
+    db.commit()
+
+
 def get_all_records(
     db: Session,
     skip: int = 0,

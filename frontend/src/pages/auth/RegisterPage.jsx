@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Sprout, Eye, EyeOff, UserPlus } from 'lucide-react'
+import { Sprout, Eye, EyeOff, UserPlus, User, FlaskConical } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 
 export default function RegisterPage() {
@@ -132,17 +132,45 @@ export default function RegisterPage() {
                   className="input-field"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1.5">Role</label>
-                <select
-                  name="role"
-                  value={form.role}
-                  onChange={handleChange}
-                  className="input-field bg-white"
-                >
-                  <option value="user">Researcher</option>
-                  <option value="admin">Admin</option>
-                </select>
+              <div className="col-span-2">
+                <label className="block text-sm font-medium text-gray-700 mb-2">Account Type *</label>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    {
+                      value: 'user',
+                      Icon: User,
+                      title: 'Normal User',
+                      desc: 'View predictions & historical data',
+                    },
+                    {
+                      value: 'researcher',
+                      Icon: FlaskConical,
+                      title: 'Researcher',
+                      desc: 'Full access to data, analysis & model tools',
+                    },
+                  ].map(({ value, Icon, title, desc }) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setForm(f => ({ ...f, role: value }))}
+                      className={`flex flex-col items-start gap-1.5 p-3 rounded-xl border-2 text-left transition-all ${
+                        form.role === value
+                          ? 'border-primary-600 bg-primary-50'
+                          : 'border-gray-200 hover:border-gray-300 bg-white'
+                      }`}
+                    >
+                      <span className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                        form.role === value ? 'bg-primary-600' : 'bg-gray-100'
+                      }`}>
+                        <Icon size={16} className={form.role === value ? 'text-white' : 'text-gray-500'} />
+                      </span>
+                      <span className={`text-sm font-semibold ${
+                        form.role === value ? 'text-primary-700' : 'text-gray-800'
+                      }`}>{title}</span>
+                      <span className="text-xs text-gray-500 leading-tight">{desc}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
 
