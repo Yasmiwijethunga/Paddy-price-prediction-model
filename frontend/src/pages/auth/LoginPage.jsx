@@ -19,8 +19,12 @@ export default function LoginPage() {
     if (!form.username || !form.password) { setError('Please fill in all fields.'); return }
     setLoading(true)
     try {
-      await login(form.username, form.password)
-      navigate('/dashboard', { replace: true })
+      const loggedInUser = await login(form.username, form.password)
+      const role = loggedInUser?.role
+      const destination = (role === 'farmer' || role === 'user')
+        ? '/farmer-dashboard'
+        : '/dashboard'
+      navigate(destination, { replace: true })
     } catch (err) {
       setError(err.response?.data?.detail || 'Invalid username or password.')
     } finally {

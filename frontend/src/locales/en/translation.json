@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Home",
+    "priceTrend": "Price Trend",
+    "prediction": "Prediction",
+    "logout": "Logout",
+    "appName": "Paddy Price"
+  },
+  "price": {
+    "currentTitle": "Today's Paddy Price",
+    "currentSub": "Latest recorded farmgate price",
+    "predictedTitle": "Expected Price Next Month",
+    "predictedSub": "AI model forecast",
+    "unit": "Rs / kg",
+    "variety": "Nadu Variety · Anuradhapura"
+  },
+  "advice": {
+    "title": "Market Advice",
+    "increase": "Prices are expected to increase next month.",
+    "increaseAction": "It may be beneficial to delay selling.",
+    "decrease": "Prices may fall next month.",
+    "decreaseAction": "Selling earlier may be a better option.",
+    "stable": "Prices are expected to remain stable."
+  },
+  "chart": {
+    "title": "Price Trend",
+    "subtitle": "Last 6 months",
+    "priceLabel": "Price (Rs/kg)",
+    "noData": "No trend data available."
+  },
+  "prediction": {
+    "title": "Price Prediction",
+    "subtitle": "Estimated paddy price for the next season",
+    "runButton": "Get Prediction",
+    "loading": "Calculating...",
+    "result": "Predicted Price",
+    "confidence": "Confidence",
+    "error": "Could not fetch prediction. Please try again."
+  },
+  "weather": {
+    "title": "Weather Summary",
+    "rainfall": "Rainfall",
+    "temperature": "Temperature",
+    "unit_rain": "mm",
+    "unit_temp": "°C"
+  },
+  "common": {
+    "loading": "Loading...",
+    "perKg": "per kg",
+    "season": "Maha Season",
+    "district": "Anuradhapura District"
+  }
+}
