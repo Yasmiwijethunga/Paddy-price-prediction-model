@@ -4,15 +4,39 @@
     "priceTrend": "Price Trend",
     "prediction": "Prediction",
     "logout": "Logout",
-    "appName": "Paddy Price"
+    "appName": "Paddy Price Prediction",
+    "appSub": "Anuradhapura District – Maha Season"
+  },
+  "variety": {
+    "label": "Select Paddy Type",
+    "nadu": "Nadu",
+    "samba": "Samba",
+    "kekulu": "Kekulu"
   },
   "price": {
-    "currentTitle": "Today's Paddy Price",
+    "currentTitle": "Current Paddy Price",
     "currentSub": "Latest recorded farmgate price",
     "predictedTitle": "Expected Price Next Month",
     "predictedSub": "AI model forecast",
     "unit": "Rs / kg",
-    "variety": "Nadu Variety · Anuradhapura"
+    "variety": "Nadu Variety · Anuradhapura",
+    "change": "vs last year",
+    "lastUpdated": "Last updated",
+    "currentShort": "Current"
+  },
+  "signal": {
+    "title": "Market Signal",
+    "good": "GOOD TIME TO SELL",
+    "wait": "WAIT – PRICE MAY RISE",
+    "risk": "PRICE FALL RISK"
+  },
+  "profit": {
+    "title": "Profit Estimator",
+    "subtitle": "Enter your harvest quantity",
+    "inputLabel": "Your Paddy Quantity (kg)",
+    "inputPlaceholder": "e.g. 1000",
+    "result": "Estimated Income",
+    "basedOn": "Based on predicted price"
   },
   "advice": {
     "title": "Market Advice",
@@ -24,30 +48,54 @@
   },
   "chart": {
     "title": "Price Trend",
-    "subtitle": "Last 6 months",
+    "subtitle": "Last 6 years",
     "priceLabel": "Price (Rs/kg)",
-    "noData": "No trend data available."
+    "noData": "No trend data available.",
+    "actual": "Actual Price",
+    "predicted": "Predicted",
+    "highest": "Highest",
+    "average": "Average",
+    "lowest": "Lowest",
+    "yearByYear": "Year-by-Year Prices",
+    "avgLabel": "Avg"
   },
   "prediction": {
     "title": "Price Prediction",
-    "subtitle": "Estimated paddy price for the next season",
+    "subtitle": "Estimated paddy price for the next Maha season",
     "runButton": "Get Prediction",
     "loading": "Calculating...",
     "result": "Predicted Price",
-    "confidence": "Confidence",
-    "error": "Could not fetch prediction. Please try again."
+    "confidence": "Confidence Level",
+    "error": "Could not fetch prediction. Please try again.",
+    "recentTitle": "Recent Predictions",
+    "highConf": "High confidence",
+    "modConf": "Moderate confidence",
+    "lowConf": "Low confidence",
+    "vsLabel": "vs",
+    "item": "Prediction {{n}}",
+    "confPct": "confidence"
   },
   "weather": {
     "title": "Weather Summary",
     "rainfall": "Rainfall",
     "temperature": "Temperature",
     "unit_rain": "mm",
-    "unit_temp": "°C"
+    "unit_temp": "°C",
+    "normal": "Normal rainfall expected"
   },
   "common": {
     "loading": "Loading...",
     "perKg": "per kg",
     "season": "Maha Season",
     "district": "Anuradhapura District"
+  },
+  "greeting": {
+    "morning": "Good Morning 🌾",
+    "afternoon": "Good Afternoon ☀️",
+    "evening": "Good Evening 🌅",
+    "night": "Good Night 🌙"
+  },
+  "dashboard": {
+    "noPrediction": "Run a prediction first to estimate income"
   }
 }

@@ -9,10 +9,27 @@
     padding: 0;
   }
   body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', 'Noto Sans Sinhala', system-ui, sans-serif;
     background-color: #F4F6F3;
     color: #1a1a1a;
   }
+
+  /* Sinhala language overrides — larger text, tighter tracking, more line-height */
+  :lang(si) {
+    font-family: 'Noto Sans Sinhala', system-ui, sans-serif;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+  }
+  :lang(si) h1, :lang(si) h2 { font-size: 1.12em; }
+  :lang(si) p, :lang(si) span, :lang(si) label, :lang(si) button {
+    font-size: 1.07em;
+  }
+  /* Tiny labels (text-xs / text-[10px]) need the most help */
+  :lang(si) .text-xs   { font-size: 0.82rem !important; }
+  :lang(si) .text-sm   { font-size: 0.93rem !important; }
+  :lang(si) .text-base { font-size: 1.02rem !important; }
+  :lang(si) .\[10px\], :lang(si) [class*="text-\[10px\]"] { font-size: 0.75rem !important; }
+  :lang(si) .\[11px\], :lang(si) [class*="text-\[11px\]"] { font-size: 0.77rem !important; }
 }
 
 @layer components {
@@ -54,3 +71,32 @@
     @apply w-full px-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
   }
 }
+
+/* ── Farmer Dashboard Animations ─────────────────────── */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-13px); }
+}
+@keyframes shimmerSweep {
+  0%   { transform: translateX(-220%) skewX(-14deg); }
+  100% { transform: translateX(420%) skewX(-14deg); }
+}
+
+.dash-stagger > * {
+  animation: fadeSlideUp 0.5s ease-out both;
+}
+.dash-stagger > *:nth-child(1)  { animation-delay: 0.04s; }
+.dash-stagger > *:nth-child(2)  { animation-delay: 0.12s; }
+.dash-stagger > *:nth-child(3)  { animation-delay: 0.20s; }
+.dash-stagger > *:nth-child(4)  { animation-delay: 0.28s; }
+.dash-stagger > *:nth-child(5)  { animation-delay: 0.36s; }
+.dash-stagger > *:nth-child(6)  { animation-delay: 0.44s; }
+.dash-stagger > *:nth-child(7)  { animation-delay: 0.52s; }
+.dash-stagger > *:nth-child(8)  { animation-delay: 0.60s; }
+.dash-stagger > *:nth-child(9)  { animation-delay: 0.68s; }
+.animate-float-orb     { animation: floatOrb 6s ease-in-out infinite; }
+.animate-shimmer-sweep { animation: shimmerSweep 4s ease-in-out infinite; }

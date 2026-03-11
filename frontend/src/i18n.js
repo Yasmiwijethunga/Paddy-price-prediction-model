@@ -24,4 +24,12 @@ i18n
     },
   })
 
+// Keep <html lang="..."> in sync so :lang(si) CSS rules activate
+i18n.on('initialized', () => {
+  document.documentElement.lang = i18n.language?.split('-')[0] || 'en'
+})
+i18n.on('languageChanged', (lng) => {
+  document.documentElement.lang = lng.split('-')[0]
+})
+
 export default i18n
