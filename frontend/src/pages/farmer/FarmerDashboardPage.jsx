@@ -176,7 +176,7 @@ export default function FarmerDashboardPage() {
   }
 
   return (
-    <div className="space-y-4 dash-stagger">
+    <div className="space-y-3 dash-stagger">
 
       {/* Variety selector */}
       {/* <div className="relative">
@@ -207,7 +207,7 @@ export default function FarmerDashboardPage() {
       </div> */}
 
       {/* Hero Welcome Banner */}
-      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1a2e1e] via-[#2a5535] to-[#163022] p-5 text-white shadow-[0px_8px_28px_rgba(0,0,0,0.22)]">
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1a2e1e] via-[#2a5535] to-[#163022] p-4 text-white shadow-[0px_8px_28px_rgba(0,0,0,0.22)]">
         <div className="absolute top-0 right-4 w-44 h-44 bg-white/5 rounded-full -translate-y-16 animate-float-orb pointer-events-none" />
         <div className="absolute bottom-0 left-4 w-28 h-28 bg-amber-400/10 rounded-full translate-y-10 animate-float-orb pointer-events-none" style={{ animationDelay: '2.2s' }} />
         <div className="absolute bottom-0 right-0 pointer-events-none opacity-[0.22] text-white">
@@ -232,85 +232,61 @@ export default function FarmerDashboardPage() {
         </div>
       </div>
 
-      {/* Market Signal Banner */}
-      <div className={`rounded-2xl border px-4 py-3 flex items-center gap-3 shadow-sm ${signalCfg.bg}`}>
-        <div className={`w-3 h-3 rounded-full ${signalCfg.dot} animate-pulse flex-shrink-0`} />
-        <SignalIcon size={20} className={`${signalCfg.iconColor} flex-shrink-0`} />
-        <div>
-          <p className={`text-[18px] font-semibold uppercase tracking-widest ${signalCfg.text} opacity-70`}>
-            {t('signal.title')}
-          </p>
-          <p className={`text-sm font-extrabold ${signalCfg.text}`}>
-            {t(`signal.${signal}`)}
-          </p>
-        </div>
-      </div>
-
-      {/* Current Price Card */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-[#1a2e1e] to-[#2d5a38] rounded-2xl p-5 text-white shadow-[0px_6px_20px_rgba(0,0,0,0.15)]">
-        <div className="absolute top-0 right-0 w-36 h-36 bg-white/5 rounded-full -translate-y-12 translate-x-12 animate-float-orb pointer-events-none" />
-        <div className="absolute -bottom-4 right-14 w-16 h-16 bg-amber-400/10 rounded-full animate-float-orb pointer-events-none" style={{ animationDelay: '3s' }} />
-        <div className="absolute bottom-0 right-2 pointer-events-none opacity-[0.07] text-white">
-          <PaddySVG className="w-14 h-18" />
-        </div>
-        <p className="text-white/65 text-xs font-semibold uppercase tracking-wider mb-2">{t('price.currentTitle')}</p>
-        <div className="flex items-end gap-2 mb-1">
-          <span className="text-5xl md:text-6xl font-extrabold text-amber-400 tabular-nums">
-            {currentPrice ? animCurrent.toLocaleString() : '—'}
-          </span>
-          <span className="text-white/60 text-base pb-1.5">{t('price.unit')}</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <p className="text-white/40 text-xs">{t('variety.nadu')} · {t('common.district')}</p>
+      {/* 3 Card Grid: Current Price, Market Signal, Predicted Price */}
+      <div className="grid grid-cols-3 gap-3">
+        {/* Current Price Mini Card */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#1a2e1e] to-[#2d5a38] rounded-2xl p-3 text-white shadow-md">
+          <p className="text-white/60 text-[10px] font-semibold uppercase tracking-wider mb-1">{t('price.currentTitle')}</p>
+          <div className="flex items-end gap-1 mb-0.5">
+            <span className="text-2xl font-extrabold text-amber-400 tabular-nums leading-none">
+              {currentPrice ? animCurrent.toLocaleString() : '—'}
+            </span>
+            <span className="text-white/50 text-[10px] pb-0.5">{t('price.unit')}</span>
+          </div>
           {priceChange !== null && (
-            <span className={`flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-full
-              ${priceChange > 0 ? 'bg-green-500/20 text-green-400' : priceChange < 0 ? 'bg-red-500/20 text-red-400' : 'bg-white/10 text-white/50'}`}>
-              {priceChange > 0 ? <TrendingUp size={11} /> : priceChange < 0 ? <TrendingDown size={11} /> : <Minus size={11} />}
-              {priceChange > 0 ? '+' : ''}{priceChange} {t('price.change')}
+            <span className={`inline-flex items-center gap-0.5 text-[10px] font-bold
+              ${priceChange > 0 ? 'text-green-400' : priceChange < 0 ? 'text-red-400' : 'text-white/50'}`}>
+              {priceChange > 0 ? <TrendingUp size={9} /> : priceChange < 0 ? <TrendingDown size={9} /> : <Minus size={9} />}
+              {priceChange > 0 ? '+' : ''}{priceChange}
             </span>
           )}
         </div>
-        {lastYear && (
-          <p className="text-white/30 text-[10px] mt-2">{t('price.lastUpdated')}: {lastYear} {t('common.season')}</p>
-        )}
-      </div>
 
-      {/* Predicted Price Card */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-5 text-white shadow-[0px_6px_20px_rgba(245,158,11,0.3)]">
-        <div className="absolute inset-y-0 w-20 bg-white/10 animate-shimmer-sweep pointer-events-none" />
-        <div className="absolute top-2 right-2 w-28 h-28 bg-white/5 rounded-full animate-float-orb pointer-events-none" style={{ animationDelay: '1s' }} />
-        <p className="text-white/75 text-xs font-semibold uppercase tracking-wider mb-2">{t('price.predictedTitle')}</p>
-        <div className="flex items-end gap-2 mb-2">
-          {predictedPrice ? (
-            <>
-              <span className="text-5xl md:text-6xl font-extrabold tabular-nums">{animPredicted.toLocaleString()}</span>
-              <span className="text-white/75 text-base pb-1.5">{t('price.unit')}</span>
-            </>
-          ) : (
-            <span className="text-xl font-semibold text-white/60">—</span>
+        {/* Market Signal Mini Card */}
+        <div className={`rounded-2xl border p-3 shadow-sm flex flex-col items-center justify-center ${signalCfg.bg}`}>
+          <div className={`w-2.5 h-2.5 rounded-full ${signalCfg.dot} animate-pulse mb-1.5`} />
+          <SignalIcon size={16} className={`${signalCfg.iconColor} mb-1`} />
+          <p className={`text-[10px] font-bold uppercase tracking-wide ${signalCfg.text}`}>
+            {t(`signal.${signal}`)}
+          </p>
+        </div>
+
+        {/* Predicted Price Mini Card */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl p-3 text-white shadow-md">
+          <p className="text-white/70 text-[10px] font-semibold uppercase tracking-wider mb-1">{t('price.predictedTitle')}</p>
+          <div className="flex items-end gap-1 mb-0.5">
+            {predictedPrice ? (
+              <>
+                <span className="text-2xl font-extrabold tabular-nums leading-none">{animPredicted.toLocaleString()}</span>
+                <span className="text-white/70 text-[10px] pb-0.5">{t('price.unit')}</span>
+              </>
+            ) : (
+              <span className="text-lg font-semibold text-white/60">—</span>
+            )}
+          </div>
+          {confidence && (
+            <p className="text-white/70 text-[9px]">{(confidence * 100).toFixed(0)}% {t('prediction.confidence')}</p>
           )}
         </div>
-        {confidence && (
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <p className="text-white/70 text-xs">{t('prediction.confidence')}</p>
-              <p className="text-white text-xs font-bold">{(confidence * 100).toFixed(1)}%</p>
-            </div>
-            <div className="h-2 bg-white/25 rounded-full overflow-hidden">
-              <div className="h-full bg-white rounded-full transition-all duration-700" style={{ width: `${Math.min(confidence * 100, 100)}%` }} />
-            </div>
-          </div>
-        )}
-        <p className="text-white/55 text-[10px] mt-2">{t('price.predictedSub')}</p>
       </div>
 
       {/* Price Trend Chart */}
-      <div className="bg-white rounded-2xl p-4 shadow-[0px_4px_16px_rgba(0,0,0,0.07)] border border-gray-100">
-        <div className="flex items-center gap-2 mb-3">
-          <BarChart2 size={16} className="text-amber-500" />
+      <div className="bg-white rounded-2xl p-3.5 shadow-[0px_4px_16px_rgba(0,0,0,0.07)] border border-gray-100">
+        <div className="flex items-center gap-2 mb-2.5">
+          <BarChart2 size={14} className="text-amber-500" />
           <div>
-            <p className="font-bold text-gray-800 text-sm">{t('chart.title')}</p>
-            <p className="text-xs text-gray-400">{t('chart.subtitle')}</p>
+            <p className="font-bold text-gray-800 text-xs">{t('chart.title')}</p>
+            <p className="text-[10px] text-gray-400">{t('chart.subtitle')}</p>
           </div>
         </div>
         {last6.length > 0 ? (
@@ -341,52 +317,52 @@ export default function FarmerDashboardPage() {
       </div>
 
       {/* Advice Card */}
-      <div className={`rounded-2xl p-4 border shadow-sm ${adviceStyle.bg} ${adviceStyle.border}`}>
-        <div className="flex items-center gap-2 mb-2">
-          <Lightbulb size={18} className={adviceStyle.icon} />
-          <p className={`font-bold text-sm ${adviceStyle.title}`}>{t('advice.title')}</p>
+      <div className={`rounded-2xl p-3.5 border shadow-sm ${adviceStyle.bg} ${adviceStyle.border}`}>
+        <div className="flex items-center gap-2 mb-1.5">
+          <Lightbulb size={16} className={adviceStyle.icon} />
+          <p className={`font-bold text-xs ${adviceStyle.title}`}>{t('advice.title')}</p>
         </div>
-        <p className={`text-sm font-medium leading-relaxed ${adviceStyle.text}`}>{t(`advice.${adviceKey}`)}</p>
+        <p className={`text-xs font-medium leading-relaxed ${adviceStyle.text}`}>{t(`advice.${adviceKey}`)}</p>
         {adviceKey !== 'stable' && (
-          <p className={`text-xs mt-1.5 ${adviceStyle.text} opacity-80`}>{t(`advice.${adviceKey}Action`)}</p>
+          <p className={`text-[10px] mt-1 ${adviceStyle.text} opacity-80`}>{t(`advice.${adviceKey}Action`)}</p>
         )}
       </div>
 
       {/* Profit Estimator */}
-      <div className="bg-white rounded-2xl p-4 shadow-[0px_4px_16px_rgba(0,0,0,0.07)] border border-gray-100">
+      <div className="bg-white rounded-2xl p-3.5 shadow-[0px_4px_16px_rgba(0,0,0,0.07)] border border-gray-100">
         <div className="flex items-center gap-2 mb-1">
-          <Calculator size={18} className="text-[#1a2e1e]" />
-          <p className="font-bold text-gray-800">{t('profit.title')}</p>
+          <Calculator size={16} className="text-[#1a2e1e]" />
+          <p className="font-bold text-gray-800 text-xs">{t('profit.title')}</p>
         </div>
-        <p className="text-xs text-gray-500 mb-3">{t('profit.subtitle')}</p>
-        <label className="block text-xs font-semibold text-gray-600 mb-1.5">{t('profit.inputLabel')}</label>
+        <p className="text-[10px] text-gray-500 mb-2.5">{t('profit.subtitle')}</p>
+        <label className="block text-[10px] font-semibold text-gray-600 mb-1.5">{t('profit.inputLabel')}</label>
         <input
           type="number" min={1} step={100} value={quantity}
           onChange={e => setQuantity(Math.max(1, Number(e.target.value)))}
-          className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-400 bg-gray-50 mb-3"
+          className="w-full border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-amber-400 bg-gray-50 mb-2.5"
           placeholder={t('profit.inputPlaceholder')}
         />
         {estimatedIncome ? (
-          <div className="bg-[#1a2e1e]/5 rounded-xl px-4 py-3">
-            <p className="text-xs text-gray-500 mb-0.5">{t('profit.result')}</p>
-            <p className="text-2xl font-extrabold text-[#1a2e1e]">Rs. {estimatedIncome.toLocaleString()}</p>
-            <p className="text-[10px] text-gray-400 mt-0.5">{t('profit.basedOn')}: Rs.{Math.round(predictedPrice)} × {quantity.toLocaleString()} kg</p>
+          <div className="bg-[#1a2e1e]/5 rounded-xl px-3.5 py-2.5">
+            <p className="text-[10px] text-gray-500 mb-0.5">{t('profit.result')}</p>
+            <p className="text-xl font-extrabold text-[#1a2e1e]">{estimatedIncome.toLocaleString()} {t('price.currency')}</p>
+            <p className="text-[9px] text-gray-400 mt-0.5">{t('profit.basedOn')}: Rs.{Math.round(predictedPrice)} × {quantity.toLocaleString()} kg</p>
           </div>
         ) : (
-          <div className="bg-gray-50 rounded-xl px-4 py-3 text-center">
-            <p className="text-xs text-gray-400">{t('dashboard.noPrediction')}</p>
+          <div className="bg-gray-50 rounded-xl px-3.5 py-2.5 text-center">
+            <p className="text-[10px] text-gray-400">{t('dashboard.noPrediction')}</p>
           </div>
         )}
       </div>
 
       {/* Weather Summary */}
       {lastClimate && (lastClimate.rainfall || lastClimate.temperature) && (
-        <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-          <p className="font-bold text-gray-800 text-sm mb-3 flex items-center gap-2">
-            <CloudRain size={16} className="text-blue-500" />
+        <div className="bg-white rounded-2xl p-3.5 shadow-sm border border-gray-100">
+          <p className="font-bold text-gray-800 text-xs mb-2.5 flex items-center gap-2">
+            <CloudRain size={14} className="text-blue-500" />
             {t('weather.title')}
           </p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2.5">
             {lastClimate.rainfall && (
               <div className="flex items-center gap-3 bg-blue-50 rounded-xl p-3">
                 <div className="w-9 h-9 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">

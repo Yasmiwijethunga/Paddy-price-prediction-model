@@ -97,5 +97,113 @@
   },
   "dashboard": {
     "noPrediction": "Run a prediction first to estimate income"
+  },
+  "auth": {
+    "login": {
+      "heroTitle1": "Predict Nadu",
+      "heroTitle2": "Paddy Prices",
+      "heroTitle3": "with Confidence",
+      "heroDesc": "Research-grade price forecasting using historical agricultural, climate, and economic data from 2015–2024.",
+      "stat1": "Model Accuracy",
+      "stat2": "Latest Price/kg",
+      "stat3": "Avg. Production",
+      "stat4": "Avg. Confidence",
+      "welcome": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "signInBtn": "Sign In",
+      "noAccount": "Don't have an account?",
+      "createAccount": "Create account",
+      "backHome": "← Back to home",
+      "errFill": "Please fill in all fields.",
+      "errInvalid": "Invalid username or password."
+    },
+    "register": {
+      "heroTitle1": "Join Our",
+      "heroTitle2": "Research",
+      "heroTitle3": "Community",
+      "heroDesc": "Access prediction tools, historical data analysis, and research reports for Nadu paddy prices in Anuradhapura District.",
+      "feat1": "Access 10-year historical dataset",
+      "feat2": "Run ML-powered price predictions",
+      "feat3": "Explore factor impact analysis",
+      "feat4": "Generate and download reports",
+      "heading": "Create account",
+      "subtitle": "Register to access the prediction system",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "e.g. sanjulee",
+      "accountTypeLabel": "Account Type",
+      "roleUserTitle": "Farmer / User",
+      "roleUserDesc": "View predictions & price trends",
+      "roleResearcherTitle": "Researcher",
+      "roleResearcherDesc": "Full access to data, analysis & model tools",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Min. 6 characters",
+      "confirmLabel": "Confirm Password",
+      "confirmPlaceholder": "Repeat password",
+      "createBtn": "Create Account",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "backHome": "← Back to home",
+      "successMsg": "Account created! Redirecting to login...",
+      "pwWeak": "Weak",
+      "pwFair": "Fair",
+      "pwGood": "Good",
+      "pwStrong": "Strong",
+      "errRequired": "All fields are required.",
+      "errUsername": "Username must be at least 3 characters.",
+      "errEmail": "Please enter a valid email address.",
+      "errPassword": "Password must be at least 6 characters.",
+      "errMatch": "Passwords do not match.",
+      "errFailed": "Registration failed. Please try again."
+    }
+  },
+  "landing": {
+    "nav": {
+      "signIn": "Sign In",
+      "getStarted": "Get Started"
+    },
+    "hero": {
+      "badge": "Anuradhapura • Nadu • Maha Season",
+      "title1": "Paddy Price",
+      "title2": "Prediction System",
+      "subtitle": "Know your paddy price before you sell.",
+      "startBtn": "Start Predicting",
+      "signInBtn": "Sign In"
+    },
+    "features": {
+      "heading": "What Can You Do?",
+      "subheading": "Simple tools made for paddy farmers.",
+      "priceTitle": "Get Price Forecast",
+      "priceDesc": "Find out the expected paddy price before the season ends.",
+      "trendTitle": "See Past Prices",
+      "trendDesc": "View how paddy prices changed over the past years.",
+      "adviceTitle": "Market Advice",
+      "adviceDesc": "Get a simple tip on the best time to sell your paddy."
+    },
+    "steps": {
+      "heading": "How It Works",
+      "subheading": "Just three easy steps.",
+      "s1title": "Enter Your Harvest",
+      "s1desc": "Tell us your paddy quantity and the current season.",
+      "s2title": "Get the Prediction",
+      "s2desc": "Our system calculates the expected farmgate price.",
+      "s3title": "Decide When to Sell",
+      "s3desc": "Use the advice to choose the best time to sell."
+    },
+    "cta": {
+      "heading": "Ready to Know the Price?",
+      "sub": "Free for all farmers. No technical knowledge needed.",
+      "btn": "Create Free Account",
+      "c1": "Free to use",
+      "c2": "Easy to understand",
+      "c3": "Sinhala & English",
+      "c4": "Real farm data"
+    },
+    "footer": "© 2025 Paddy Price Prediction System — Anuradhapura District, Sri Lanka"
   }
 }
